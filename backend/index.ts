@@ -87,6 +87,7 @@ app.use('/uploads', express.static('/tmp/uploads'));
 
 
 // Fallback for Single Page Application (SPA)
+// FIX: Add explicit types to the route handler to ensure correct type inference for req and res.
 app.get('*', (req: Request, res: Response, next: NextFunction) => {
   // Avoid API routes from being served the index.html
   if (!req.path.startsWith('/api/') && !req.path.startsWith('/uploads/')) {
