@@ -1,5 +1,5 @@
 import './config.js'; // Must be the first import to load environment variables
-import express, { Request, Response, NextFunction } from 'express';
+import express from 'express';
 import mongoose from 'mongoose';
 import cors from 'cors';
 import { createServer } from 'http';
@@ -88,7 +88,7 @@ app.use('/uploads', express.static('/tmp/uploads'));
 
 // Fallback for Single Page Application (SPA)
 // FIX: Add explicit types to the route handler to ensure correct type inference for req and res.
-app.get('*', (req: Request, res: Response, next: NextFunction) => {
+app.get('*', (req: express.Request, res: express.Response, next: express.NextFunction) => {
   // Avoid API routes from being served the index.html
   if (!req.path.startsWith('/api/') && !req.path.startsWith('/uploads/')) {
     res.sendFile(path.resolve(frontendDistPath, 'index.html'));

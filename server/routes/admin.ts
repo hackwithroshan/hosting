@@ -1,4 +1,4 @@
-import express, { Request, Response } from 'express';
+import express from 'express';
 import { protect, admin } from '../middleware/auth';
 import User from '../models/User';
 import Service from '../models/Service';
@@ -8,7 +8,7 @@ const router = express.Router();
 // @desc    Get admin dashboard stats
 // @route   GET /api/admin/stats
 // @access  Private/Admin
-router.get('/stats', protect, admin, async (req: Request, res: Response) => {
+router.get('/stats', protect, admin, async (req: express.Request, res: express.Response) => {
     try {
         const totalUsers = await User.countDocuments({ role: 'user' });
         const activeServices = await Service.countDocuments({ status: 'active' });
@@ -30,7 +30,7 @@ router.get('/stats', protect, admin, async (req: Request, res: Response) => {
 // @desc    Get all users
 // @route   GET /api/admin/users
 // @access  Private/Admin
-router.get('/users', protect, admin, async (req: Request, res: Response) => {
+router.get('/users', protect, admin, async (req: express.Request, res: express.Response) => {
     try {
         const users = await User.find({ role: 'user' }).select('-password').sort({ createdAt: -1 });
         res.json(users);

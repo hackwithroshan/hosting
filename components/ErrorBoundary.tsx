@@ -14,6 +14,7 @@ class ErrorBoundary extends Component<Props, State> {
   // FIX: Refactored to use a class property initializer for state instead of a constructor.
   // This modern syntax resolves TypeScript errors where properties like `state`, `setState`,
   // and `props` were not being recognized on the component instance.
+  // FIX: Removed the 'public' keyword as it is not standard for state initialization.
   state: State = { hasError: false };
 
   public static getDerivedStateFromError(_: Error): State {
